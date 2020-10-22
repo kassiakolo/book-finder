@@ -5,8 +5,7 @@
       <b-button class="button" v-b-modal="'my-modal'">Filters</b-button>
 
       <!-- The modal -->
-      <b-modal id="my-modal">
-        <h4>Let's give more details...</h4>
+      <b-modal id="my-modal" title="Let's give more details..." @ok="filter">
         <b-form-input
           v-model="author"
           class="form"
@@ -22,6 +21,13 @@
           class="form"
           placeholder="Published Date"
         ></b-form-datepicker>
+        <b-form-group>
+          <b-form-checkbox-group
+            v-model="selectedCategories"
+            :options="categories"
+            class="form"
+          ></b-form-checkbox-group>
+        </b-form-group>
       </b-modal>
     </div>
   </div>
@@ -35,7 +41,32 @@ export default {
       author: "",
       language: "",
       publishedDate: "",
+      selectedCategories: [],
+      categories: [
+        { text: "Biography & Autobiography", value: "biography & autobiography" },
+        { text: "Cooking", value: "cooking" },
+        { text: "Drama", value: "drama" },
+        { text: "Education", value: "education" },
+        { text: "Fiction", value: "fiction" },
+        { text: "History", value: "history" },
+        { text: "Poetry", value: "poetry" },
+        { text: "Thriller", value: "thriller" },
+        { text: "Travel", value: "travel" },
+        { text: "Science", value: "science" },
+        { text: "Sport & Recreation", value: "sport & recreation" },
+      ],
     };
+  },
+  methods: {
+    filter() {
+      const newFilter = {
+        author: this.author,
+        language: this.language,
+        publishedDate: this.publishedDate,
+        selectedCategories: this.selectedCategories,
+      };
+      this.$emit("new-filter", newFilter);
+    },
   },
 };
 </script>
@@ -52,9 +83,9 @@ h4 {
 }
 
 .button {
-    background-color: whitesmoke;
-    color: gray;
-    width: 300px;
-    border-color: rgb(226, 223, 223);
+  background-color: whitesmoke;
+  color: gray;
+  width: 300px;
+  border-color: rgb(226, 223, 223);
 }
 </style>
