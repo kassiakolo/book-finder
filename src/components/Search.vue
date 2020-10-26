@@ -9,7 +9,7 @@
         name="title"
         placeholder="Book title..."
       />
-      <b-button class="col" type="submit">Search</b-button>
+      <b-button class="col" type="submit" :disabled="allEmpty()">Search</b-button>
     </form>
     <Filters v-on:new-filter="filter" class="filters" />
   </div>
@@ -25,7 +25,6 @@ export default {
     return {
       title: "",
       author: "",
-      publishedDate: "",
       language: "",
     };
   },
@@ -34,19 +33,25 @@ export default {
       const newSearch = {
         title: this.title,
         author: this.author,
-        publishedDate: this.publishedDate,
         language: this.language,
       };
       console.log(newSearch);
       this.$emit("new-search", newSearch);
       this.title = "";
-      (this.author = ""), (this.publishedDate = ""), (this.language = "");
+      this.author = "";
+      this.language = "";
     },
     filter(newFilter) {
       this.author = newFilter.author;
-      this.publishedDate = newFilter.publishedDate;
       this.language = newFilter.language;
       console.log(newFilter);
+    },
+    allEmpty() {
+      if (!this.title && !this.author && !this.language) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };

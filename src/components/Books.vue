@@ -3,11 +3,11 @@
     <div v-bind:key="book.id" v-for="book in pageBooks">
       <BookCard v-bind:book="book" />
     </div>
-    <b-pagination v-if="books.length > 0"
+    <b-pagination
+      v-if="books !== undefined && books.length > 0"
       v-model="currentPage"
       :total-rows="rows"
       :per-page="perPage"
-      aria-controls="my-table"
     ></b-pagination>
   </div>
 </template>
@@ -21,6 +21,12 @@ export default {
     BookCard,
   },
   props: ["books"],
+  watch: {
+     // eslint-disable-next-line no-unused-vars
+    books: function(newVal, oldVal) {
+      this.currentPage = 1;
+    },
+  },
   data() {
     return {
       currentPage: 1,
@@ -29,12 +35,18 @@ export default {
   },
   computed: {
     pageBooks() {
+      if (this.books === undefined) {
+        return [];
+      }
       return this.books.slice(
         (this.currentPage - 1) * this.perPage,
         this.currentPage * this.perPage
       );
     },
     rows() {
+      if (this.books === undefined) {
+        return 0;
+      }
       return this.books.length;
     },
   },

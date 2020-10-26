@@ -11,17 +11,12 @@
           class="form"
           placeholder="Author"
         ></b-form-input>
-        <b-form-datepicker
-          v-model="publishedDate"
-          class="form"
-          placeholder="Published Date"
-        ></b-form-datepicker>
         <b-form-group class="form"
-          ><b-form-radio v-model="language" name="language" value="PL"
-            >PL</b-form-radio
+          ><b-form-radio v-model="language" name="language" value="pl"
+            >Polish</b-form-radio
           >
-          <b-form-radio v-model="language" name="language" value="EN"
-            >EN</b-form-radio
+          <b-form-radio v-model="language" name="language" value="en"
+            >English</b-form-radio
           >
         </b-form-group>
       </b-modal>
@@ -35,7 +30,6 @@ export default {
   data() {
     return {
       author: "",
-      publishedDate: "",
       language: "",
     };
   },
@@ -43,10 +37,11 @@ export default {
     filter() {
       const newFilter = {
         author: this.author,
-        publishedDate: this.publishedDate,
         language: this.language,
       };
       this.$emit("new-filter", newFilter);
+      this.author = "",
+      this.author = ""
     },
   },
 };
