@@ -11,22 +11,18 @@
           class="form"
           placeholder="Author"
         ></b-form-input>
-        <b-form-input
-          v-model="language"
-          class="form"
-          placeholder="Language"
-        ></b-form-input>
         <b-form-datepicker
           v-model="publishedDate"
           class="form"
           placeholder="Published Date"
         ></b-form-datepicker>
-        <b-form-group>
-          <b-form-checkbox-group
-            v-model="selectedCategories"
-            :options="categories"
-            class="form"
-          ></b-form-checkbox-group>
+        <b-form-group class="form"
+          ><b-form-radio v-model="language" name="language" value="PL"
+            >PL</b-form-radio
+          >
+          <b-form-radio v-model="language" name="language" value="EN"
+            >EN</b-form-radio
+          >
         </b-form-group>
       </b-modal>
     </div>
@@ -39,31 +35,16 @@ export default {
   data() {
     return {
       author: "",
-      language: "",
       publishedDate: "",
-      selectedCategories: [],
-      categories: [
-        { text: "Biography & Autobiography", value: "biography & autobiography" },
-        { text: "Cooking", value: "cooking" },
-        { text: "Drama", value: "drama" },
-        { text: "Education", value: "education" },
-        { text: "Fiction", value: "fiction" },
-        { text: "History", value: "history" },
-        { text: "Poetry", value: "poetry" },
-        { text: "Thriller", value: "thriller" },
-        { text: "Travel", value: "travel" },
-        { text: "Science", value: "science" },
-        { text: "Sport & Recreation", value: "sport & recreation" },
-      ],
+      language: "",
     };
   },
   methods: {
     filter() {
       const newFilter = {
         author: this.author,
-        language: this.language,
         publishedDate: this.publishedDate,
-        selectedCategories: this.selectedCategories,
+        language: this.language,
       };
       this.$emit("new-filter", newFilter);
     },

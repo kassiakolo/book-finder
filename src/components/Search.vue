@@ -26,7 +26,7 @@ export default {
       title: "",
       author: "",
       publishedDate: "",
-      category: "",
+      language: "",
     };
   },
   methods: {
@@ -34,20 +34,18 @@ export default {
       const newSearch = {
         title: this.title,
         author: this.author,
-        language: this.language,
         publishedDate: this.publishedDate,
-        selectedCategories: this.selectedCategories,
+        language: this.language,
       };
       console.log(newSearch);
       this.$emit("new-search", newSearch);
       this.title = "";
-      (this.author = ""), (this.bublishedDate = ""), (this.category = "");
+      (this.author = ""), (this.publishedDate = ""), (this.language = "");
     },
     filter(newFilter) {
       this.author = newFilter.author;
-      this.language = newFilter.language;
       this.publishedDate = newFilter.publishedDate;
-      this.selectedCategories = newFilter.selectedCategories;
+      this.language = newFilter.language;
       console.log(newFilter);
     },
   },

@@ -33,9 +33,20 @@ export default {
   },
   methods: {
     search(newSearch) {
-      const {title, selectedCategories} = newSearch;
-      const url = `https://www.googleapis.com/books/v1/volumes?q=${title}+subject:${selectedCategories}`
-      console.log(url)
+      const { title, author, language} = newSearch;
+      let url = "https://www.googleapis.com/books/v1/volumes?q="
+      let query= []
+      if (title !== undefined && title !== '') {
+        query.push(`intitle:${title}`)
+      }
+       if (author !== undefined && author !== '') {
+        query.push(`inauthor:${author}`)
+      }
+       if (language !== undefined) {
+        query.push(`language:${language}`)
+      }
+      url += query.join('+')
+      console.log(url);
       axios
         .get(url)
         .then((res) => {
