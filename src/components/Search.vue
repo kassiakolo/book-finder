@@ -11,7 +11,7 @@
       />
       <b-button class="col" type="submit" :disabled="allEmpty()">Search</b-button>
     </form>
-    <Filters v-on:new-filter="filter" class="filters" />
+    <Filters v-on:new-filter="filter" v-bind:author="author" v-bind:language="language" class="filters" />
   </div>
 </template>
 
@@ -47,7 +47,7 @@ export default {
       console.log(newFilter);
     },
     allEmpty() {
-      if (!this.title && !this.author && !this.language) {
+      if (!this.title && !this.author) {
         return true;
       } else {
         return false;

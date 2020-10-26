@@ -40,9 +40,16 @@ export default {
   font-size: 1.1rem;
 }
 
-/* .description {
+.description {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-} */
+  width: 100%;
+} 
+
+.description:hover {
+  overflow: visible;
+  white-space:unset;
+} 
+
 </style>

@@ -7,15 +7,15 @@
       <!-- The modal -->
       <b-modal id="my-modal" title="Let's give more details..." @ok="filter">
         <b-form-input
-          v-model="author"
+          v-model="authorInput"
           class="form"
           placeholder="Author"
         ></b-form-input>
         <b-form-group class="form"
-          ><b-form-radio v-model="language" name="language" value="pl"
+          ><b-form-radio v-model="languageInput" name="language" value="pl"
             >Polish</b-form-radio
           >
-          <b-form-radio v-model="language" name="language" value="en"
+          <b-form-radio v-model="languageInput" name="language" value="en"
             >English</b-form-radio
           >
         </b-form-group>
@@ -29,19 +29,28 @@ export default {
   name: "Filters",
   data() {
     return {
-      author: "",
-      language: "",
+      authorInput: this.author,
+      languageInput: this.language,
     };
+  },
+  props: ["author", "language"],
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    author: function(newVal, oldVal) {
+      this.authorInput = newVal;
+    },
+    // eslint-disable-next-line no-unused-vars
+    language: function(newVal, oldVal) {
+      this.languageInput = newVal;
+    },
   },
   methods: {
     filter() {
       const newFilter = {
-        author: this.author,
-        language: this.language,
+        author: this.authorInput,
+        language: this.languageInput,
       };
       this.$emit("new-filter", newFilter);
-      this.author = "",
-      this.author = ""
     },
   },
 };

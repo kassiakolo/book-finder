@@ -6,6 +6,7 @@
         <div class="book-search">
           <div>
             <Search v-on:new-search="search" />
+            <b-alert v-if="!this.books" show>No search results.</b-alert>
           </div>
           <Books v-bind:books="books" />
         </div>
